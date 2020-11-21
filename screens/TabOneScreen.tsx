@@ -7,7 +7,51 @@ import { Text, View } from "../components/Themed";
 import data from "../data/stops.json";
 import { Stop } from "../types/Stop";
 
+import * as Location from "expo-location";
+import * as Permissions from "expo-permissions";
+import { Coordinate } from "../types/Coordinate";
+
 export default function TabOneScreen() {
+  const [userLocation, setUserLocation] = React.useState<Coordinate>();
+  const [userGeocode, setUserGeocode] = React.useState<any>();
+  const [details, setDetails] = React.useState<string>();
+
+  const getGeocodeAsync = async (location: any) => {
+    let geocode = await Location.reverseGeocodeAsync(location);
+    setUserGeocode(geocode);
+    console.log(geocode);
+  };
+  const getReadableAddress = (geocode: Location.LocationGeocodedAddress[]) => {
+    let address = "";
+
+    if (geocode[0]) {
+      address =
+        geocode[0].name +
+        " " +
+        geocode[0].street +
+        " " +
+        geocode[0].city +
+        " " +
+        geocode[0].region;
+    }
+    return address;
+  };
+  const getLocationAsync = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== "granted") {
+      console.log("denied location");
+    }
+
+    let location = await Location.getCurrentPositionAsync({
+      accuracy: Location.Accuracy.Highest,
+    });
+    const { latitude, longitude } = location.coords;
+    setUserLocation({ latitude, longitude });
+    getGeocodeAsync({ latitude, longitude });
+
+    console.log(location);
+  };
+
   return (
     <View style={styles.container}>
       <MapView
@@ -19,16 +63,29 @@ export default function TabOneScreen() {
           longitudeDelta: 0.05,
         }}
       >
+        {userLocation && (
+          <Marker
+            coordinate={userLocation}
+            title={"You"}
+            description={"This is u"}
+            pinColor={"red"}
+            onPress={() => setDetails(getReadableAddress(userGeocode))}
+          />
+        )}
         {data.allStops.map((stop: Stop, index) => (
           <Marker
             key={index}
-            coordinate={{ latitude: stop.lat, longitude: stop.long }}
+            coordinate={stop.location}
             title={stop.title}
             description={stop.description}
+            pinColor={"blue"}
+            onPress={() => setDetails(stop.schedule)}
           />
         ))}
       </MapView>
-      <Button onPress={() => console.log("bum")} title={"Find Location"} />
+      <Button onPress={() => getLocationAsync()} title={"Find Location"} />
+      <Text>Location details:</Text>
+      {details && <Text>{details}</Text>}
     </View>
   );
 }

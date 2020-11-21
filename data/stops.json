@@ -1,0 +1,16 @@
+{
+  "allStops": [
+    {
+      "location": { "latitude": 43.4643, "longitude": -80.5204 },
+      "title": "Nice stop",
+      "description": "This is where u get on bus",
+      "schedule": "9:00 AM: Bus arrives"
+    },
+    {
+      "location": { "latitude": 43.462, "longitude": -80.521 },
+      "title": "Bad stop",
+      "description": "This is where u die",
+      "schedule": "11:00 PM: You die at this time."
+    }
+  ]
+}
