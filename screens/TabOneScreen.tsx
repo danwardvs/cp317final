@@ -1,5 +1,10 @@
 import * as React from "react";
-import { Button, Dimensions, StyleSheet } from "react-native";
+import {
+  ActivityIndicator,
+  Button,
+  Dimensions,
+  StyleSheet,
+} from "react-native";
 import MapView, { Marker } from "react-native-maps";
 
 import EditScreenInfo from "../components/EditScreenInfo";
@@ -10,9 +15,11 @@ import { Stop } from "../types/Stop";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import { Coordinate } from "../types/Coordinate";
+import CustomButton from "../components/CustomButton";
 
 export default function TabOneScreen() {
   let mapRef = React.useRef<MapView>(null);
+  const [loadingLocation, setLoadingLocation] = React.useState(false);
   const [userLocation, setUserLocation] = React.useState<Coordinate>();
   const [userGeocode, setUserGeocode] = React.useState<any>();
   const [details, setDetails] = React.useState<string>();
@@ -49,6 +56,7 @@ export default function TabOneScreen() {
     return address;
   };
   const getLocationAsync = async () => {
+    setLoadingLocation(true);
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status !== "granted") {
       console.log("denied location");
@@ -60,7 +68,7 @@ export default function TabOneScreen() {
     const { latitude, longitude } = location.coords;
     setUserLocation({ latitude, longitude });
     changeRegion(latitude, longitude);
-
+    setLoadingLocation(false);
     getGeocodeAsync({ latitude, longitude });
   };
 
@@ -96,7 +104,12 @@ export default function TabOneScreen() {
           />
         ))}
       </MapView>
-      <Button onPress={() => getLocationAsync()} title={"Find Location"} />
+      <CustomButton
+        onPress={() => getLocationAsync()}
+        label={loadingLocation ? "" : "Find Location"}
+      >
+        {loadingLocation && <ActivityIndicator size="large" color="white" />}
+      </CustomButton>
       <Text>Location details:</Text>
       {details && <Text>{details}</Text>}
     </View>
