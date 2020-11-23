@@ -4,11 +4,12 @@ import MapView, { Marker } from "react-native-maps";
 
 import { Text, View } from "../components/Themed";
 import data from "../data/stops.json";
-import { Stop, Coordinate } from "../types/Types";
+import { Stop, Coordinate, equalCoordinates } from "../types/Types";
 
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import CustomButton from "../components/CustomButton";
+import { unloadAllAsync } from "expo-font";
 
 export default function TabOneScreen() {
   let mapRef = React.useRef<MapView>(null);
@@ -64,6 +65,12 @@ export default function TabOneScreen() {
     setLoadingLocation(false);
     getGeocodeAsync({ latitude, longitude });
   };
+  const handleLocationPress = () => {
+    setDetails(getReadableAddress(userGeocode));
+  };
+  const handleStopPress = (stop: Stop) => {
+    setDetails(stop.schedule);
+  };
 
   return (
     <View style={styles.container}>
@@ -77,7 +84,18 @@ export default function TabOneScreen() {
           longitudeDelta: 0.05,
         }}
         showsCompass
-        onPress={() => setDetails(null)}
+        onPress={() => setDetails(undefined)}
+        onMarkerPress={(marker) => {
+          const coordinate: Coordinate = marker.nativeEvent.coordinate;
+          if (userLocation && equalCoordinates(coordinate, userLocation)) {
+            handleLocationPress();
+          } else {
+            const stop = data.allStops.find((stop) =>
+              equalCoordinates(stop.location, coordinate)
+            );
+            if (stop) handleStopPress(stop);
+          }
+        }}
       >
         {userLocation && (
           <Marker
@@ -85,7 +103,6 @@ export default function TabOneScreen() {
             title={"You"}
             description={"This is u"}
             pinColor={"red"}
-            onPress={() => setDetails(getReadableAddress(userGeocode))}
           />
         )}
         {data.allStops.map((stop: Stop, index) => (
@@ -95,7 +112,6 @@ export default function TabOneScreen() {
             title={stop.title}
             description={stop.description}
             pinColor={"blue"}
-            onPress={() => setDetails(stop.schedule)}
           />
         ))}
       </MapView>
