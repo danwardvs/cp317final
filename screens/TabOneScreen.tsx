@@ -1,20 +1,13 @@
 import * as React from "react";
-import {
-  ActivityIndicator,
-  Button,
-  Dimensions,
-  StyleSheet,
-} from "react-native";
+import { ActivityIndicator, Dimensions, StyleSheet } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 
-import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 import data from "../data/stops.json";
-import { Stop } from "../types/Stop";
+import { Stop, Coordinate } from "../types/Types";
 
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
-import { Coordinate } from "../types/Coordinate";
 import CustomButton from "../components/CustomButton";
 
 export default function TabOneScreen() {
@@ -83,6 +76,8 @@ export default function TabOneScreen() {
           latitudeDelta: 0.05,
           longitudeDelta: 0.05,
         }}
+        showsCompass
+        onPress={() => setDetails(null)}
       >
         {userLocation && (
           <Marker
@@ -110,8 +105,12 @@ export default function TabOneScreen() {
       >
         {loadingLocation && <ActivityIndicator size="large" color="white" />}
       </CustomButton>
-      <Text>Location details:</Text>
-      {details && <Text>{details}</Text>}
+      {details && (
+        <>
+          <Text>Location details:</Text>
+          <Text>{details}</Text>
+        </>
+      )}
     </View>
   );
 }
