@@ -10,7 +10,6 @@ import { equalCoordinates, getWeekday } from "../util/Helpers";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import CustomButton from "../components/CustomButton";
-import { unloadAllAsync } from "expo-font";
 
 export default function MapScreen() {
   let mapRef = React.useRef<MapView>(null);
