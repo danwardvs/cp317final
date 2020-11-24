@@ -11,7 +11,7 @@ function TabBarIcon(props: { name: string; color: string }) {
   return <AntDesign size={24} style={{ marginBottom: -3 }} {...props} />;
 }
 
-export default function TabTwoScreen() {
+export default function BrowseScreen() {
   return (
     <View style={styles.container}>
       <FlatList

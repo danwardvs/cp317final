@@ -12,7 +12,7 @@ import * as Permissions from "expo-permissions";
 import CustomButton from "../components/CustomButton";
 import { unloadAllAsync } from "expo-font";
 
-export default function TabOneScreen() {
+export default function MapScreen() {
   let mapRef = React.useRef<MapView>(null);
   const [loadingLocation, setLoadingLocation] = React.useState(false);
   const [userLocation, setUserLocation] = React.useState<Coordinate>();
