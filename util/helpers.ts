@@ -1,4 +1,4 @@
-import { Coordinate } from "../types/Types";
+import { Coordinate, Stop } from "../types/types";
 
 export const getWeekday = (day: number) => {
   switch (day) {
@@ -19,6 +19,10 @@ export const getWeekday = (day: number) => {
     default:
       return "Invalid day";
   }
+};
+
+export const lookupStopId = (stops: Stop[], stop_id: string) => {
+  return stops.find((stop) => stop.id === stop_id);
 };
 
 export const equalCoordinates = (

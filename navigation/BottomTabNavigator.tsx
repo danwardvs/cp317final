@@ -7,7 +7,11 @@ import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import MapScreen from "../screens/MapScreen";
 import BrowseScreen from "../screens/BrowseScreen";
-import { BottomTabParamList, MapParamList, BrowseParamList } from "../types";
+import {
+  BottomTabParamList,
+  MapParamList,
+  BrowseParamList,
+} from "../types/routeParams";
 import StopDetailsScreen from "../screens/StopDetailsScreen";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();

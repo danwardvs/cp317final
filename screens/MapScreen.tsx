@@ -4,8 +4,8 @@ import MapView, { Marker } from "react-native-maps";
 
 import { Text, View } from "../components/Themed";
 import data from "../data/stops.json";
-import { Stop, Coordinate, Schedule } from "../types/Types";
-import { equalCoordinates, getWeekday } from "../util/Helpers";
+import { Stop, Coordinate, Schedule } from "../types/types";
+import { equalCoordinates, getWeekday } from "../util/helpers";
 
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";

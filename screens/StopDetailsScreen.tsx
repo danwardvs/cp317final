@@ -1,15 +1,28 @@
 import { StackScreenProps } from "@react-navigation/stack";
 import * as React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import ScheduleDisplay from "../components/ScheduleDisplay";
+import data from "../data/stops.json";
 
-import { RootStackParamList } from "../types";
+import { BrowseParamList } from "../types/routeParams";
+import { lookupStopId } from "../util/helpers";
 
 export default function StopDetailsScreen({
   navigation,
-}: StackScreenProps<RootStackParamList, "NotFound">) {
+  route,
+}: StackScreenProps<BrowseParamList, "StopDetailsScreen">) {
+  const stop = lookupStopId(data.allStops, route.params.stop_id);
+  if (stop)
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>{stop.title}</Text>
+        <ScheduleDisplay stop={stop} />
+      </View>
+    );
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Details for this stop here</Text>
+      <Text style={styles.title}>Error loading stop data: Invalid ID</Text>
     </View>
   );
 }

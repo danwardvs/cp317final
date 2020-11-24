@@ -1,6 +1,7 @@
 export interface Stop {
   location: Coordinate;
   title: string;
+  id: string;
   description: string;
   schedule: Schedule;
 }
