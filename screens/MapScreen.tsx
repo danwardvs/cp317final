@@ -10,6 +10,8 @@ import { equalCoordinates, getWeekday } from "../util/helpers";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import CustomButton from "../components/CustomButton";
+import { ScrollView } from "react-native-gesture-handler";
+import ScheduleDisplay from "../components/ScheduleDisplay";
 
 export default function MapScreen() {
   let mapRef = React.useRef<MapView>(null);
@@ -17,14 +19,7 @@ export default function MapScreen() {
   const [userLocation, setUserLocation] = React.useState<Coordinate>();
   const [userGeocode, setUserGeocode] = React.useState<any>();
   const [details, setDetails] = React.useState<string>();
-
-  const stopToString = (schedule: Schedule) => {
-    let str = "";
-    for (let i = 0; i < 7; i++) {
-      str += getWeekday(i) + ": " + schedule.week[i] + " \n";
-    }
-    return str;
-  };
+  const [selectedStop, setSelectedStop] = React.useState<Stop>();
 
   const changeRegion = (latitude: number, longitude: number) => {
     mapRef?.current?.animateToRegion(
@@ -79,73 +74,86 @@ export default function MapScreen() {
     } else {
       setDetails("Address here");
     }
+    setSelectedStop(undefined);
   };
   const handleStopPress = (stop: Stop) => {
-    setDetails(stopToString(stop.schedule));
+    setDetails(undefined);
+    setSelectedStop(stop);
   };
 
   return (
-    <View style={styles.container}>
-      <MapView
-        ref={mapRef}
-        style={styles.mapStyle}
-        initialRegion={{
-          latitude: 43.4643,
-          longitude: -80.5204,
-          latitudeDelta: 0.05,
-          longitudeDelta: 0.05,
-        }}
-        showsCompass
-        onPress={() => setDetails(undefined)}
-        onMarkerPress={(marker) => {
-          const coordinate: Coordinate = marker.nativeEvent.coordinate;
-          if (userLocation && equalCoordinates(coordinate, userLocation)) {
-            handleLocationPress();
-          } else {
-            const stop = data.allStops.find((stop) =>
-              equalCoordinates(stop.location, coordinate)
-            );
-            if (stop) handleStopPress(stop);
-          }
-        }}
-      >
-        {userLocation && (
-          <Marker
-            coordinate={userLocation}
-            title={"You"}
-            description={"This is u"}
-            pinColor={"red"}
-          />
+    <ScrollView>
+      <View style={styles.container}>
+        <MapView
+          ref={mapRef}
+          style={styles.mapStyle}
+          initialRegion={{
+            latitude: 43.4643,
+            longitude: -80.5204,
+            latitudeDelta: 0.05,
+            longitudeDelta: 0.05,
+          }}
+          showsCompass
+          onPress={() => {
+            setDetails(undefined);
+            setSelectedStop(undefined);
+          }}
+          onMarkerPress={(marker) => {
+            const coordinate: Coordinate = marker.nativeEvent.coordinate;
+            if (userLocation && equalCoordinates(coordinate, userLocation)) {
+              handleLocationPress();
+            } else {
+              const stop = data.allStops.find((stop) =>
+                equalCoordinates(stop.location, coordinate)
+              );
+              if (stop) handleStopPress(stop);
+            }
+          }}
+        >
+          {userLocation && (
+            <Marker
+              coordinate={userLocation}
+              title={"You"}
+              description={"This is u"}
+              pinColor={"red"}
+            />
+          )}
+          {data.allStops.map((stop: Stop, index) => (
+            <Marker
+              key={index}
+              coordinate={stop.location}
+              title={stop.title}
+              description={stop.description}
+              pinColor={"blue"}
+            />
+          ))}
+        </MapView>
+        <CustomButton
+          onPress={() => getLocationAsync()}
+          label={loadingLocation ? "" : "Find Location"}
+        >
+          {loadingLocation && <ActivityIndicator size="large" color="white" />}
+        </CustomButton>
+        {details && (
+          <>
+            <Text>Location details:</Text>
+            <Text>{details}</Text>
+          </>
         )}
-        {data.allStops.map((stop: Stop, index) => (
-          <Marker
-            key={index}
-            coordinate={stop.location}
-            title={stop.title}
-            description={stop.description}
-            pinColor={"blue"}
-          />
-        ))}
-      </MapView>
-      <CustomButton
-        onPress={() => getLocationAsync()}
-        label={loadingLocation ? "" : "Find Location"}
-      >
-        {loadingLocation && <ActivityIndicator size="large" color="white" />}
-      </CustomButton>
-      {details && (
-        <>
-          <Text>Location details:</Text>
-          <Text>{details}</Text>
-        </>
-      )}
-    </View>
+        {!details && selectedStop && (
+          <View style={{ padding: 12 }}>
+            <ScheduleDisplay stop={selectedStop} />
+          </View>
+        )}
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    minHeight: Dimensions.get("window").height - 130,
   },
   title: {
     fontSize: 20,

@@ -16,6 +16,8 @@ export default function StopDetailsScreen({
     return (
       <View style={styles.container}>
         <Text style={styles.title}>{stop.title}</Text>
+        <Text style={styles.details}>{stop.description}</Text>
+
         <ScheduleDisplay stop={stop} />
       </View>
     );
@@ -32,19 +34,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
     padding: 20,
   },
   title: {
     fontSize: 20,
     fontWeight: "bold",
   },
-  link: {
-    marginTop: 15,
-    paddingVertical: 15,
-  },
-  linkText: {
-    fontSize: 14,
-    color: "#2e78b7",
+  details: {
+    fontSize: 18,
+    paddingBottom: 24,
   },
 });
