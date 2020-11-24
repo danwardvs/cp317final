@@ -31,6 +31,38 @@
           "9:00 AM and 11:00 AM"
         ]
       }
+    },
+    {
+      "location": { "latitude": 43.47176, "longitude": -80.537066 },
+      "title": "Waterloo Shopping Plaza",
+      "description": "University Ave W",
+      "schedule": {
+        "week": [
+          "Not running.",
+          "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
+          "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
+          "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
+          "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
+          "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
+          "9:00 AM and 11:00 AM"
+        ]
+      }
+    },
+    {
+      "location": { "latitude": 43.472788, "longitude": -80.544054 },
+      "title": "Waterloo University Campus",
+      "description": "William Tutte Way",
+      "schedule": {
+        "week": [
+          "Not running.",
+          "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
+          "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
+          "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
+          "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
+          "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
+          "9:00 AM and 11:00 AM"
+        ]
+      }
     }
   ]
 }

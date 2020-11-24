@@ -6,18 +6,24 @@ import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 
 import { Text, View } from "../components/Themed";
+import { StackScreenProps } from "@react-navigation/stack";
+import { BrowseParamList } from "../types";
 
 function TabBarIcon(props: { name: string; color: string }) {
   return <AntDesign size={24} style={{ marginBottom: -3 }} {...props} />;
 }
 
-export default function BrowseScreen() {
+export default function BrowseScreen({
+  navigation,
+}: StackScreenProps<BrowseParamList, "BrowseScreen">) {
   return (
     <View style={styles.container}>
       <FlatList
         data={data.allStops}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => console.log(item.description)}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("StopDetailsScreen")}
+          >
             <View style={styles.tile} key={item.title}>
               <Text style={styles.item}>{item.title}</Text>
               <View style={{ paddingTop: 10 }}>

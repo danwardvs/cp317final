@@ -14,4 +14,5 @@ export type MapParamList = {
 
 export type BrowseParamList = {
   BrowseScreen: undefined;
+  StopDetailsScreen: undefined;
 };

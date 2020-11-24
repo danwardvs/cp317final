@@ -8,6 +8,7 @@ import useColorScheme from "../hooks/useColorScheme";
 import MapScreen from "../screens/MapScreen";
 import BrowseScreen from "../screens/BrowseScreen";
 import { BottomTabParamList, MapParamList, BrowseParamList } from "../types";
+import StopDetailsScreen from "../screens/StopDetailsScreen";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -80,6 +81,11 @@ function BrowseNavigator() {
         name="BrowseScreen"
         component={BrowseScreen}
         options={{ headerTitle: "Browse By Stop" }}
+      />
+      <BrowseStack.Screen
+        name="StopDetailsScreen"
+        component={StopDetailsScreen}
+        options={{ headerTitle: "Stop Details" }}
       />
     </BrowseStack.Navigator>
   );
