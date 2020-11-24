@@ -1,16 +1,36 @@
 {
   "allStops": [
     {
-      "location": { "latitude": 43.4643, "longitude": -80.5204 },
-      "title": "Nice stop",
-      "description": "This is where u get on bus",
-      "schedule": "9:00 AM: Bus arrives"
+      "location": { "latitude": 43.475403, "longitude": -80.527041 },
+      "title": "Laurier Campus - Main",
+      "description": "University Ave W",
+      "schedule": {
+        "week": [
+          "Not running.",
+          "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
+          "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
+          "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
+          "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
+          "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
+          "9:00 AM and 11:00 AM"
+        ]
+      }
     },
     {
-      "location": { "latitude": 43.462, "longitude": -80.521 },
-      "title": "Bad stop",
-      "description": "This is where u die",
-      "schedule": "11:00 PM: You die at this time."
+      "location": { "latitude": 43.4717, "longitude": -80.529363 },
+      "title": "Laurier Campus - South",
+      "description": "Albert St.",
+      "schedule": {
+        "week": [
+          "9:00 AM, 1:00 PM",
+          "7:00 AM, 9:00 AM, 5:00 PM, 6:00 PM",
+          "7:00 AM, 9:00 AM, 5:00 PM, 6:00 PM",
+          "7:00 AM, 9:00 AM, 5:00 PM, 6:00 PM",
+          "7:00 AM, 9:00 AM, 5:00 PM, 6:00 PM",
+          "7:00 AM, 9:00 AM, 5:00 PM, 6:00 PM",
+          "9:00 AM and 11:00 AM"
+        ]
+      }
     }
   ]
 }

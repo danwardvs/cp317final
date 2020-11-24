@@ -4,7 +4,8 @@ import MapView, { Marker } from "react-native-maps";
 
 import { Text, View } from "../components/Themed";
 import data from "../data/stops.json";
-import { Stop, Coordinate, equalCoordinates } from "../types/Types";
+import { Stop, Coordinate, Schedule } from "../types/Types";
+import { equalCoordinates, getWeekday } from "../util/Helpers";
 
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
@@ -17,6 +18,14 @@ export default function TabOneScreen() {
   const [userLocation, setUserLocation] = React.useState<Coordinate>();
   const [userGeocode, setUserGeocode] = React.useState<any>();
   const [details, setDetails] = React.useState<string>();
+
+  const stopToString = (schedule: Schedule) => {
+    let str = "";
+    for (let i = 0; i < 7; i++) {
+      str += getWeekday(i) + ": " + schedule.week[i] + " \n";
+    }
+    return str;
+  };
 
   const changeRegion = (latitude: number, longitude: number) => {
     mapRef?.current?.animateToRegion(
@@ -54,22 +63,26 @@ export default function TabOneScreen() {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status !== "granted") {
       console.log("denied location");
+    } else {
+      let location = await Location.getCurrentPositionAsync({
+        accuracy: Location.Accuracy.Highest,
+      });
+      const { latitude, longitude } = location.coords;
+      setUserLocation({ latitude, longitude });
+      changeRegion(latitude, longitude);
+      setLoadingLocation(false);
+      getGeocodeAsync({ latitude, longitude });
     }
-
-    let location = await Location.getCurrentPositionAsync({
-      accuracy: Location.Accuracy.Highest,
-    });
-    const { latitude, longitude } = location.coords;
-    setUserLocation({ latitude, longitude });
-    changeRegion(latitude, longitude);
-    setLoadingLocation(false);
-    getGeocodeAsync({ latitude, longitude });
   };
   const handleLocationPress = () => {
-    setDetails(getReadableAddress(userGeocode));
+    if (userGeocode) {
+      setDetails(getReadableAddress(userGeocode));
+    } else {
+      setDetails("Address here");
+    }
   };
   const handleStopPress = (stop: Stop) => {
-    setDetails(stop.schedule);
+    setDetails(stopToString(stop.schedule));
   };
 
   return (

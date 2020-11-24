@@ -1,37 +1,31 @@
 import * as React from "react";
 import { FlatList, StyleSheet } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import data from "../data/stops.json";
+import { Ionicons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
 import { Text, View } from "../components/Themed";
+
+function TabBarIcon(props: { name: string; color: string }) {
+  return <AntDesign size={24} style={{ marginBottom: -3 }} {...props} />;
+}
 
 export default function TabTwoScreen() {
   return (
     <View style={styles.container}>
       <FlatList
-        data={[
-          { key: "Devin" },
-          { key: "Dan" },
-          { key: "Dominic" },
-          { key: "Jackson" },
-          { key: "James" },
-          { key: "Joel" },
-          { key: "John" },
-          { key: "Jillian" },
-          { key: "Jimmy" },
-          { key: "Julie" },
-          { key: "Devin" },
-          { key: "Dan" },
-          { key: "Dominic" },
-          { key: "Jackson" },
-          { key: "James" },
-          { key: "Joel" },
-          { key: "John" },
-          { key: "Jillian" },
-          { key: "Jimmy" },
-          { key: "Julie" },
-        ]}
-        renderItem={({ item }) => <Text style={styles.item}>{item.key}</Text>}
+        data={data.allStops}
+        renderItem={({ item }) => (
+          <TouchableOpacity onPress={() => console.log(item.description)}>
+            <View style={styles.tile} key={item.title}>
+              <Text style={styles.item}>{item.title}</Text>
+              <View style={{ paddingTop: 10 }}>
+                <TabBarIcon name="right" color={"gray"} />
+              </View>
+            </View>
+          </TouchableOpacity>
+        )}
       />
     </View>
   );
@@ -41,7 +35,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-
+  tile: {
+    borderColor: "gray",
+    borderWidth: 1,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignContent: "center",
+  },
   item: {
     padding: 10,
     fontSize: 18,
