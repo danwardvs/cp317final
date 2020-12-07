@@ -20,7 +20,11 @@ export const getWeekday = (day: number) => {
       return "Invalid day";
   }
 };
-
+export const findDistance = (a: Coordinate, b: Coordinate) => {
+  return (
+    Math.abs(a.latitude - b.latitude) + Math.abs(a.longitude - a.longitude)
+  );
+};
 export const lookupStopId = (stops: Stop[], stop_id: string) => {
   return stops.find((stop) => stop.id === stop_id);
 };

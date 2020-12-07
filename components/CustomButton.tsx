@@ -1,12 +1,14 @@
 import * as React from "react";
 import { StyleSheet, TouchableOpacity, Text } from "react-native";
 
-const CustomButton: React.FC<React.PropsWithChildren<{
-  color?: string;
-  onPress?: () => void;
-  style?: any;
-  label?: string;
-}>> = ({ color, onPress, children, label, style = {} }) => {
+const CustomButton: React.FC<
+  React.PropsWithChildren<{
+    color?: string;
+    onPress?: () => void;
+    style?: any;
+    label?: string;
+  }>
+> = ({ color, onPress, children, label, style = {} }) => {
   const handleClick = () => {
     onPress?.();
   };
@@ -24,12 +26,12 @@ const CustomButton: React.FC<React.PropsWithChildren<{
 const styles = StyleSheet.create({
   button: {
     backgroundColor: "#34ced1",
-    height: 52,
+    height: 40,
     lineHeight: 52,
     paddingLeft: 30,
     paddingRight: 30,
     borderRadius: 25,
-    margin: 10,
+    margin: 6,
 
     textAlign: "center",
     alignItems: "center",
@@ -38,7 +40,7 @@ const styles = StyleSheet.create({
   },
 
   buttonText: {
-    fontSize: 24,
+    fontSize: 20,
     color: "white",
   },
 });

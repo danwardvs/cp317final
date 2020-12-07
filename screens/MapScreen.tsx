@@ -5,7 +5,7 @@ import MapView, { Marker } from "react-native-maps";
 import { Text, View } from "../components/Themed";
 import data from "../data/stops.json";
 import { Stop, Coordinate, Schedule } from "../types/types";
-import { equalCoordinates, getWeekday } from "../util/helpers";
+import { equalCoordinates, getWeekday, findDistance } from "../util/helpers";
 
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
@@ -21,13 +21,17 @@ export default function MapScreen() {
   const [details, setDetails] = React.useState<string>();
   const [selectedStop, setSelectedStop] = React.useState<Stop>();
 
-  const changeRegion = (latitude: number, longitude: number) => {
+  const changeRegion = (
+    latitude: number,
+    longitude: number,
+    delta?: number
+  ) => {
     mapRef?.current?.animateToRegion(
       {
         latitude,
         longitude,
-        latitudeDelta: 0.01,
-        longitudeDelta: 0.01,
+        latitudeDelta: delta ?? 0.01,
+        longitudeDelta: delta ?? 0.01,
       },
       1000
     );
@@ -52,6 +56,18 @@ export default function MapScreen() {
     }
     return address;
   };
+  const findNearestStop = (userLocation: Coordinate) => {
+    let closestStop = data.allStops[0];
+    data.allStops.forEach((stop) => {
+      if (
+        findDistance(closestStop.location, userLocation) >
+        findDistance(stop.location, userLocation)
+      )
+        closestStop = stop;
+    });
+    return closestStop;
+  };
+
   const getLocationAsync = async () => {
     setLoadingLocation(true);
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
@@ -70,9 +86,9 @@ export default function MapScreen() {
   };
   const handleLocationPress = () => {
     if (userGeocode) {
-      setDetails(getReadableAddress(userGeocode));
+      setDetails("Current Location:\n" + getReadableAddress(userGeocode));
     } else {
-      setDetails("Address here");
+      setDetails("Current address unavailable.");
     }
     setSelectedStop(undefined);
   };
@@ -134,10 +150,28 @@ export default function MapScreen() {
         >
           {loadingLocation && <ActivityIndicator size="large" color="white" />}
         </CustomButton>
+        {userLocation && (
+          <CustomButton
+            onPress={() => {
+              const closestStop = findNearestStop(userLocation);
+              changeRegion(
+                closestStop.location.latitude,
+                closestStop.location.longitude,
+                0.005
+              );
+              setDetails(
+                "Closest stop is:\n" +
+                  closestStop.title +
+                  "\n" +
+                  closestStop.description
+              );
+            }}
+            label={"Find Nearest Stop"}
+          ></CustomButton>
+        )}
         {details && (
           <>
-            <Text>Location details:</Text>
-            <Text>{details}</Text>
+            <Text style={styles.details}>{details}</Text>
           </>
         )}
         {!details && selectedStop && (
@@ -164,8 +198,12 @@ const styles = StyleSheet.create({
     height: 1,
     width: "80%",
   },
+  details: {
+    padding: 16,
+    fontSize: 20,
+  },
   mapStyle: {
     width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height / 2,
+    height: Dimensions.get("window").height / 2.5,
   },
 });
