@@ -20,19 +20,19 @@ const DirectionsDisplay: React.FC<
 
     return (
       <View style={[styles.button]} key={index}>
-        <Text style={[styles.buttonText]}>
-          {step.distance.text}: {text}
-        </Text>
+        <View style={{ display: "flex", flexDirection: "column", padding: 4 }}>
+          <Text style={[styles.buttonText]}>
+            {step.distance.text}: {text}
+          </Text>
+        </View>
       </View>
     );
   });
-  return <Text>BUM</Text>;
 };
 
 const styles = StyleSheet.create({
   button: {
     backgroundColor: "#ffdc96",
-    height: 40,
     lineHeight: 52,
     paddingLeft: 20,
     paddingRight: 20,
