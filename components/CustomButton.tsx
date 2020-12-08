@@ -14,7 +14,10 @@ const CustomButton: React.FC<
   };
 
   return (
-    <TouchableOpacity onPress={handleClick} style={[styles.button, style]}>
+    <TouchableOpacity
+      onPress={handleClick}
+      style={[styles.button, style, color ? { backgroundColor: color } : {}]}
+    >
       <Text style={[styles.buttonText]}>
         {children}
         {label}
@@ -28,9 +31,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#34ced1",
     height: 40,
     lineHeight: 52,
-    paddingLeft: 30,
-    paddingRight: 30,
-    borderRadius: 25,
+    paddingLeft: 20,
+    paddingRight: 20,
+    borderRadius: 20,
     margin: 6,
 
     textAlign: "center",

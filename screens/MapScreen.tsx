@@ -5,7 +5,13 @@ import MapView, { Marker } from "react-native-maps";
 import { Text, View } from "../components/Themed";
 import data from "../data/stops.json";
 import { Stop, Coordinate, Schedule } from "../types/types";
-import { equalCoordinates, getWeekday, findDistance } from "../util/helpers";
+import {
+  equalCoordinates,
+  getWeekday,
+  findDistance,
+  stopToString,
+  coordinateToString,
+} from "../util/helpers";
 
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
@@ -18,10 +24,15 @@ import MapViewDirections from "react-native-maps-directions";
 export default function MapScreen() {
   let mapRef = React.useRef<MapView>(null);
   const [loadingLocation, setLoadingLocation] = React.useState(false);
+  const [loadingDirections, setLoadingDirections] = React.useState(false);
+
   const [userLocation, setUserLocation] = React.useState<Coordinate>();
   const [userGeocode, setUserGeocode] = React.useState<any>();
   const [details, setDetails] = React.useState<string>();
   const [selectedStop, setSelectedStop] = React.useState<Stop>();
+  const [displayDirections, setDisplayDirections] = React.useState<boolean>();
+  const [directions, setDirections] = React.useState<any>();
+  const [travelMethod, setTravelMethod] = React.useState("walking");
 
   const changeRegion = (
     latitude: number,
@@ -98,7 +109,7 @@ export default function MapScreen() {
     setDetails(undefined);
     setSelectedStop(stop);
   };
-
+  const handleDirection = () => {};
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -115,8 +126,10 @@ export default function MapScreen() {
           onPress={() => {
             setDetails(undefined);
             setSelectedStop(undefined);
+            setDisplayDirections(false);
           }}
           onMarkerPress={(marker) => {
+            setDisplayDirections(false);
             const coordinate: Coordinate = marker.nativeEvent.coordinate;
             if (userLocation && equalCoordinates(coordinate, userLocation)) {
               handleLocationPress();
@@ -145,7 +158,7 @@ export default function MapScreen() {
               pinColor={"blue"}
             />
           ))}
-          {userLocation && selectedStop && (
+          {userLocation && selectedStop && displayDirections && (
             <MapViewDirections
               origin={userLocation}
               destination={selectedStop.location}
@@ -159,7 +172,7 @@ export default function MapScreen() {
           onPress={() => getLocationAsync()}
           label={loadingLocation ? "" : "Find Location"}
         >
-          {loadingLocation && <ActivityIndicator size="large" color="white" />}
+          {loadingLocation && <ActivityIndicator size="small" color="white" />}
         </CustomButton>
         {userLocation && !selectedStop && (
           <CustomButton
@@ -181,18 +194,49 @@ export default function MapScreen() {
           ></CustomButton>
         )}
         {userLocation && selectedStop && (
-          <CustomButton
-            onPress={() => {
-              const closestStop = findNearestStop(userLocation);
-              changeRegion(
-                closestStop.location.latitude,
-                closestStop.location.longitude,
-                0.005
-              );
-            }}
-            label={"Display Directions"}
-          ></CustomButton>
+          <View style={{ display: "flex", flexDirection: "row" }}>
+            <CustomButton
+              onPress={() => {
+                setLoadingDirections(true);
+                setDisplayDirections(true);
+                fetch(
+                  "https://maps.googleapis.com/maps/api/directions/json?origin=" +
+                    coordinateToString(userLocation) +
+                    "&destination=" +
+                    stopToString(selectedStop) +
+                    "&key=" +
+                    appData.expo.android.config.googleMaps.apiKey +
+                    "&mode=" +
+                    travelMethod
+                )
+                  .then((response) => response.json())
+                  .then((json) => {
+                    console.log("HERE: ");
+                    setLoadingDirections(false);
+                    const data = json.routes[0].legs[0].steps;
+                    console.log(data);
+                    let directions = "Duration: " + data;
+                  });
+              }}
+              label={loadingDirections ? "" : "Get Directions"}
+            >
+              {loadingDirections && (
+                <ActivityIndicator size="small" color="white" />
+              )}
+            </CustomButton>
+            <CustomButton
+              color={travelMethod !== "walking" ? "green" : "gray"}
+              label="Walk"
+              onPress={() => setTravelMethod("driving")}
+            />
+            <CustomButton
+              color={travelMethod === "walking" ? "green" : "gray"}
+              label="Drive"
+              onPress={() => setTravelMethod("walking")}
+            />
+          </View>
         )}
+
         {details && (
           <>
             <Text style={styles.details}>{details}</Text>

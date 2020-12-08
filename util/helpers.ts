@@ -25,6 +25,14 @@ export const findDistance = (a: Coordinate, b: Coordinate) => {
     Math.abs(a.latitude - b.latitude) + Math.abs(a.longitude - a.longitude)
   );
 };
+export const coordinateToString = (coordinate: Coordinate) => {
+  return coordinate.latitude.toString() + "," + coordinate.longitude.toString();
+};
+export const stopToString = (stop: Stop) => {
+  return (
+    stop.location.latitude.toString() + "," + stop.location.longitude.toString()
+  );
+};
 export const lookupStopId = (stops: Stop[], stop_id: string) => {
   return stops.find((stop) => stop.id === stop_id);
 };
