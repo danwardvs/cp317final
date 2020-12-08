@@ -1,5 +1,11 @@
 import * as React from "react";
-import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  View,
+  Platform,
+} from "react-native";
 
 const DirectionsDisplay: React.FC<
   React.PropsWithChildren<{
@@ -7,7 +13,11 @@ const DirectionsDisplay: React.FC<
   }>
 > = ({ directions }) => {
   return directions.map((step: any, index: number) => {
-    const text = step.html_instructions.replaceAll(/<[^>]*>/g, "");
+    let text = "";
+    if (Platform.OS === "android")
+      text = step.html_instructions.replace(/<[^>]*>/g, "");
+    else text = step.html_instructions.replaceAll(/<[^>]*>/g, "");
+
     return (
       <View style={[styles.button]} key={index}>
         <Text style={[styles.buttonText]}>
@@ -16,6 +26,7 @@ const DirectionsDisplay: React.FC<
       </View>
     );
   });
+  return <Text>BUM</Text>;
 };
 
 const styles = StyleSheet.create({
