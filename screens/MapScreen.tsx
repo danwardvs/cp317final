@@ -20,6 +20,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import ScheduleDisplay from "../components/ScheduleDisplay";
 import appData from "../app.json";
 import MapViewDirections from "react-native-maps-directions";
+import DirectionsDisplay from "../components/DirectionsDisplay";
 
 export default function MapScreen() {
   let mapRef = React.useRef<MapView>(null);
@@ -211,11 +212,9 @@ export default function MapScreen() {
                 )
                   .then((response) => response.json())
                   .then((json) => {
-                    console.log("HERE: ");
                     setLoadingDirections(false);
                     const data = json.routes[0].legs[0].steps;
-                    console.log(data);
-                    let directions = "Duration: " + data;
+                    setDirections(data);
                   });
               }}
               label={loadingDirections ? "" : "Get Directions"}
@@ -246,6 +245,9 @@ export default function MapScreen() {
           <View style={{ padding: 12 }}>
             <ScheduleDisplay stop={selectedStop} />
           </View>
+        )}
+        {!details && displayDirections && directions && (
+          <DirectionsDisplay directions={directions} />
         )}
       </View>
     </ScrollView>
