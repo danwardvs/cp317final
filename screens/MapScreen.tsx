@@ -12,6 +12,8 @@ import * as Permissions from "expo-permissions";
 import CustomButton from "../components/CustomButton";
 import { ScrollView } from "react-native-gesture-handler";
 import ScheduleDisplay from "../components/ScheduleDisplay";
+import appData from "../app.json";
+import MapViewDirections from "react-native-maps-directions";
 
 export default function MapScreen() {
   let mapRef = React.useRef<MapView>(null);
@@ -143,6 +145,15 @@ export default function MapScreen() {
               pinColor={"blue"}
             />
           ))}
+          {userLocation && selectedStop && (
+            <MapViewDirections
+              origin={userLocation}
+              destination={selectedStop.location}
+              apikey={appData.expo.android.config.googleMaps.apiKey}
+              strokeWidth={4}
+              strokeColor="green"
+            />
+          )}
         </MapView>
         <CustomButton
           onPress={() => getLocationAsync()}
@@ -150,7 +161,7 @@ export default function MapScreen() {
         >
           {loadingLocation && <ActivityIndicator size="large" color="white" />}
         </CustomButton>
-        {userLocation && (
+        {userLocation && !selectedStop && (
           <CustomButton
             onPress={() => {
               const closestStop = findNearestStop(userLocation);
@@ -167,6 +178,19 @@ export default function MapScreen() {
               );
             }}
             label={"Find Nearest Stop"}
+          ></CustomButton>
+        )}
+        {userLocation && selectedStop && (
+          <CustomButton
+            onPress={() => {
+              const closestStop = findNearestStop(userLocation);
+              changeRegion(
+                closestStop.location.latitude,
+                closestStop.location.longitude,
+                0.005
+              );
+            }}
+            label={"Display Directions"}
           ></CustomButton>
         )}
         {details && (
