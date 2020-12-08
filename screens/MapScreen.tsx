@@ -224,14 +224,14 @@ export default function MapScreen() {
               )}
             </CustomButton>
             <CustomButton
-              color={travelMethod !== "walking" ? "green" : "gray"}
+              color={travelMethod !== "walking" ? "gray" : "green"}
               label="Walk"
-              onPress={() => setTravelMethod("driving")}
+              onPress={() => setTravelMethod("walking")}
             />
             <CustomButton
-              color={travelMethod === "walking" ? "green" : "gray"}
+              color={travelMethod === "walking" ? "gray" : "green"}
               label="Drive"
-              onPress={() => setTravelMethod("walking")}
+              onPress={() => setTravelMethod("driving")}
             />
           </View>
         )}
@@ -241,13 +241,13 @@ export default function MapScreen() {
             <Text style={styles.details}>{details}</Text>
           </>
         )}
+        {!details && displayDirections && directions && (
+          <DirectionsDisplay directions={directions} />
+        )}
         {!details && selectedStop && (
           <View style={{ padding: 12 }}>
             <ScheduleDisplay stop={selectedStop} />
           </View>
-        )}
-        {!details && displayDirections && directions && (
-          <DirectionsDisplay directions={directions} />
         )}
       </View>
     </ScrollView>

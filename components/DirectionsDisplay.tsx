@@ -6,22 +6,27 @@ const DirectionsDisplay: React.FC<
     directions: any;
   }>
 > = ({ directions }) => {
-  return directions.map((step: any) => (
-    <View style={[styles.button]}>
-      <Text style={[styles.buttonText]}>{step.html_instructions}</Text>
-    </View>
-  ));
+  return directions.map((step: any, index: number) => {
+    const text = step.html_instructions.replaceAll(/<[^>]*>/g, "");
+    return (
+      <View style={[styles.button]} key={index}>
+        <Text style={[styles.buttonText]}>
+          {step.distance.text}: {text}
+        </Text>
+      </View>
+    );
+  });
 };
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "#34ced1",
+    backgroundColor: "#ffdc96",
     height: 40,
     lineHeight: 52,
     paddingLeft: 20,
     paddingRight: 20,
-    borderRadius: 20,
-    margin: 6,
+    borderRadius: 5,
+    margin: 2,
 
     textAlign: "center",
     alignItems: "center",
@@ -30,8 +35,8 @@ const styles = StyleSheet.create({
   },
 
   buttonText: {
-    fontSize: 20,
-    color: "white",
+    fontSize: 16,
+    color: "black",
   },
 });
 
