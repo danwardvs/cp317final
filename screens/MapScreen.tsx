@@ -76,8 +76,9 @@ export default function MapScreen() {
       if (
         findDistance(closestStop.location, userLocation) >
         findDistance(stop.location, userLocation)
-      )
+      ) {
         closestStop = stop;
+      }
     });
     return closestStop;
   };
@@ -110,7 +111,6 @@ export default function MapScreen() {
     setDetails(undefined);
     setSelectedStop(stop);
   };
-  const handleDirection = () => {};
   return (
     <ScrollView>
       <View style={styles.container}>

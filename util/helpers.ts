@@ -21,8 +21,9 @@ export const getWeekday = (day: number) => {
   }
 };
 export const findDistance = (a: Coordinate, b: Coordinate) => {
-  return (
-    Math.abs(a.latitude - b.latitude) + Math.abs(a.longitude - a.longitude)
+  return Math.sqrt(
+    Math.pow(a.latitude - b.latitude, 2) +
+      Math.pow(a.longitude - b.longitude, 2)
   );
 };
 export const coordinateToString = (coordinate: Coordinate) => {
