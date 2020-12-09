@@ -28,7 +28,7 @@ export default function ScheduleRouteFromStopDisplay({ stop }: { stop: Stop }) {
                     onPress={() => {
                         const route_to_display = lookupRouteId(stop.routes, item.stop_route_id)
                         if (route_to_display)
-                            (
+                            return (
                                 <View style={{ padding: 12 }}>
                                     <ScheduleDisplay stop_route={route_to_display} />
                                 </View>

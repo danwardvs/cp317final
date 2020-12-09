@@ -11,13 +11,13 @@ import { Text, View } from "./Themed";
 export default function ScheduleDisplay({ stop_route }: { stop_route: StopRoute }) {
   return (
     <View>
-      {stop_route.schedule.week.map((day, index) => (
+      {[0,1,2].map((index) => (
         <View style={styles.container} key={index}>
           <View style={{ width: "25%", height: 25 }}>
             <Text>{getWeekday(index)}</Text>
           </View>
           <View style={{ display: "flex", width: "75%" }}>
-            <Text>{stop_route.schedule.week[index]}</Text>
+            <Text>{stop_route.schedule[index].arrival_time}</Text>
           </View>
         </View>
       ))}

@@ -4,7 +4,7 @@ import MapView, { Marker } from "react-native-maps";
 
 import { Text, View } from "../components/Themed";
 import data from "../data/stops.json";
-import { Stop, Coordinate, Schedule } from "../types/types";
+import { Stop, Coordinate } from "../types/types";
 import {
   equalCoordinates,
   getWeekday,
