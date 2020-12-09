@@ -1,72 +1,74 @@
 {
-  "allStops": [
-    {
-      "location": { "latitude": 43.475403, "longitude": -80.527041 },
-      "title": "Laurier Campus - Main",
-      "id": "a095f020-6e09-44c0-96b0-e92784c77667",
-      "description": "University Ave W",
-      "schedule": {
-        "week": [
-          "Not running.",
-          "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
-          "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
-          "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
-          "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
-          "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
-          "9:00 AM and 11:00 AM"
+    "allStops": [
+        {
+          "id": 1,
+          "title": "Laurier Campus",
+          "location": { "latitude": 43.475403, "longitude": -80.527041 },
+          "routes": [
+              {
+                "stop_route_id": 1,
+                "schedule": {
+                  "week": [
+                    "Not running.",
+                    "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
+                    "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
+                    "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
+                    "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
+                    "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
+                    "9:00 AM and 11:00 AM"
+                  ]
+                }
+              },
+              {
+                "stop_route_id": 2,
+                "schedule": {
+                  "week": [
+                    "9:00 AM, 1:00 PM",
+                    "7:00 AM, 9:00 AM, 5:00 PM, 6:00 PM",
+                    "7:00 AM, 9:00 AM, 5:00 PM, 6:00 PM",
+                    "7:00 AM, 9:00 AM, 5:00 PM, 6:00 PM",
+                    "7:00 AM, 9:00 AM, 5:00 PM, 6:00 PM",
+                    "7:00 AM, 9:00 AM, 5:00 PM, 6:00 PM",
+                    "9:00 AM and 11:00 AM"
+                  ]
+                }
+              }
         ]
-      }
-    },
-    {
-      "location": { "latitude": 43.4717, "longitude": -80.529363 },
-      "title": "Laurier Campus - South",
-      "id": "e7d6d061-3b9e-41d1-8964-d364141bca71",
-      "description": "Albert St.",
-      "schedule": {
-        "week": [
-          "9:00 AM, 1:00 PM",
-          "7:00 AM, 9:00 AM, 5:00 PM, 6:00 PM",
-          "7:00 AM, 9:00 AM, 5:00 PM, 6:00 PM",
-          "7:00 AM, 9:00 AM, 5:00 PM, 6:00 PM",
-          "7:00 AM, 9:00 AM, 5:00 PM, 6:00 PM",
-          "7:00 AM, 9:00 AM, 5:00 PM, 6:00 PM",
-          "9:00 AM and 11:00 AM"
-        ]
-      }
-    },
-    {
-      "location": { "latitude": 43.47176, "longitude": -80.537066 },
-      "title": "Waterloo Shopping Plaza",
-      "id": "49ecc01e-f2f6-4139-bd16-f601b51ef825",
-      "description": "University Ave W",
-      "schedule": {
-        "week": [
-          "Not running.",
-          "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
-          "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
-          "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
-          "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
-          "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
-          "9:00 AM and 11:00 AM"
-        ]
-      }
-    },
-    {
-      "location": { "latitude": 43.472788, "longitude": -80.544054 },
+      },
+      {
+      "id": 2,
       "title": "Waterloo University Campus",
-      "id": "d3aee7fd-cd33-438b-9866-2fa84bc3ce4c",
-      "description": "William Tutte Way",
-      "schedule": {
-        "week": [
-          "Not running.",
-          "8:00 AM, 9:00 AM, 10:00 AM, 4:00 PM, 5:00 PM, 6:00 PM",
-          "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
-          "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
-          "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
-          "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
-          "9:00 AM and 11:00 AM"
-        ]
+      "location": { "latitude": 43.47176, "longitude": -80.537066 },
+      "routes": [
+          {
+            "stop_route_id": 1,
+            "schedule": {
+              "week": [
+                "Not running.",
+                "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
+                "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
+                "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
+                "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
+                "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
+                "9:00 AM and 11:00 AM"
+              ]
+            }
+          },
+          {
+            "stop_route_id": 2,
+            "schedule": {
+              "week": [
+                "Not running.",
+                "8:00 AM, 9:00 AM, 10:00 AM, 4:00 PM, 5:00 PM, 6:00 PM",
+                "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
+                "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
+                "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
+                "8:00 AM, 10:00 AM, 4:00 PM, 6:00 PM",
+                "9:00 AM and 11:00 AM"
+              ]
+            }
+          }
+      ]
       }
-    }
   ]
 }

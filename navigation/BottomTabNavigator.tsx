@@ -13,6 +13,7 @@ import {
   BrowseParamList,
 } from "../types/routeParams";
 import StopDetailsScreen from "../screens/StopDetailsScreen";
+import BrowseStopScreen from "../screens/BrowseStopScreen";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -85,6 +86,11 @@ function BrowseNavigator() {
         name="BrowseScreen"
         component={BrowseScreen}
         options={{ headerTitle: "Browse By Stop" }}
+      />
+      <BrowseStack.Screen
+        name="BrowseStopScreen"
+        component={BrowseStopScreen}
+        options={{ headerTitle: "Browse Routes By Stop" }}
       />
       <BrowseStack.Screen
         name="StopDetailsScreen"

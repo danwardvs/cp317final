@@ -1,4 +1,4 @@
-import { Coordinate, Stop } from "../types/types";
+import { Coordinate, Stop, StopRoute } from "../types/types";
 
 export const getWeekday = (day: number) => {
   switch (day) {
@@ -34,8 +34,12 @@ export const stopToString = (stop: Stop) => {
     stop.location.latitude.toString() + "," + stop.location.longitude.toString()
   );
 };
-export const lookupStopId = (stops: Stop[], stop_id: string) => {
+export const lookupStopId = (stops: Stop[], stop_id: number) => {
   return stops.find((stop) => stop.id === stop_id);
+};
+
+export const lookupRouteId = (routes: StopRoute[], stop_route_id: number) => {
+  return routes.find((stop_route) => stop_route.stop_route_id === stop_route_id);
 };
 
 export const equalCoordinates = (

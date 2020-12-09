@@ -1,8 +1,12 @@
 export interface Stop {
-  location: Coordinate;
+  id: number;
   title: string;
-  id: string;
-  description: string;
+  routes: StopRoute[];
+  location: Coordinate;
+}
+
+export interface StopRoute {
+  stop_route_id: number;
   schedule: Schedule;
 }
 

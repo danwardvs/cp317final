@@ -23,7 +23,7 @@ export default function BrowseScreen({
         renderItem={({ item }) => (
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate("StopDetailsScreen", { stop_id: item.id })
+              navigation.navigate("BrowseStopScreen", { stop_id: item.id })
             }
           >
             <View style={styles.tile} key={item.title}>

@@ -17,7 +17,7 @@ import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import CustomButton from "../components/CustomButton";
 import { ScrollView } from "react-native-gesture-handler";
-import ScheduleDisplay from "../components/ScheduleDisplay";
+import SelectRouteFromStopDisplay from "../components/SelectRouteFromStopDisplay";
 import appData from "../app.json";
 import MapViewDirections from "react-native-maps-directions";
 import DirectionsDisplay from "../components/DirectionsDisplay";
@@ -155,7 +155,6 @@ export default function MapScreen() {
               key={index}
               coordinate={stop.location}
               title={stop.title}
-              description={stop.description}
               pinColor={"blue"}
             />
           ))}
@@ -186,9 +185,7 @@ export default function MapScreen() {
               );
               setDetails(
                 "Closest stop is:\n" +
-                  closestStop.title +
-                  "\n" +
-                  closestStop.description
+                  closestStop.title
               );
             }}
             label={"Find Nearest Stop"}
@@ -246,7 +243,7 @@ export default function MapScreen() {
         )}
         {!details && selectedStop && (
           <View style={{ padding: 12 }}>
-            <ScheduleDisplay stop={selectedStop} />
+            <SelectRouteFromStopDisplay stop={selectedStop} />
           </View>
         )}
       </View>
