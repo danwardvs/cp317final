@@ -50,7 +50,7 @@ export default function ScheduleRouteFromStopDisplay({ stop }: { stop: Stop }) {
               }}
             >
               <View style={styles.tile} key={item.stop_route_id}>
-                <Text style={styles.item}>{item.stop_route_id}</Text>
+                <Text style={styles.item}>{"Route: " + item.stop_route_id}</Text>
                 <View style={{ paddingTop: 10 }}>
                   <TabBarIcon name="right" color={"gray"} />
                 </View>

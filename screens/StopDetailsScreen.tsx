@@ -18,7 +18,7 @@ export default function StopDetailsScreen({
       return (
         <View style={styles.container}>
           <Text style={styles.title}>{stop.title}</Text>
-          <Text style={styles.details}>{stop_route.stop_route_id}</Text>
+          <Text style={styles.details}>{"Route: " + stop_route.stop_route_id}</Text>
 
           <ScheduleDisplay stop_route={stop_route} />
         </View>
