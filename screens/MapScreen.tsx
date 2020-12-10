@@ -129,8 +129,8 @@ export default function MapScreen() {
           initialRegion={{
             latitude: 43.4643,
             longitude: -80.5204,
-            latitudeDelta: 0.015,
-            longitudeDelta: 0.015,
+            latitudeDelta: 0.011,
+            longitudeDelta: 0.011,
           }}
           showsCompass
           onPress={() => {
