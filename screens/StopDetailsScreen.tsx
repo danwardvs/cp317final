@@ -7,6 +7,12 @@ import data from "../data/stops.json";
 import { BrowseParamList } from "../types/routeParams";
 import { lookupStopId, lookupRouteId } from "../util/helpers";
 
+// Name of the module: StopDetailsScreen
+// Date of module creation: December 8, 2020
+// Author of the module: Hayden Jeanson
+// Modification history: None
+// Synopsis of the module about what the module does: Displays list of all routes at a stop
+
 export default function StopDetailsScreen({
   navigation,
   route,

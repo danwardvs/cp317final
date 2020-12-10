@@ -4,6 +4,12 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import { RootStackParamList } from "../types/routeParams";
 
+// Name of the module: NotFoundScreen
+// Date of module creation: November 24, 2020
+// Author of the module: Danny Van Stemp
+// Modification history: None
+// Synopsis of the module about what the module does: Default screen when a screen is missing
+
 export default function NotFoundScreen({
   navigation,
 }: StackScreenProps<RootStackParamList, "NotFound">) {

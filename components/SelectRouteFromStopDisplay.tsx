@@ -18,6 +18,12 @@ function TabBarIcon(props: { name: string; color: string }) {
   return <AntDesign size={24} style={{ marginBottom: -3 }} {...props} />;
 }
 
+// Name of the module: ScheduleRouteFromStopDisplay
+// Date of module creation: December 8, 2020
+// Author of the module: Hayden Jeanson
+// Modification history: None
+// Synopsis of the module about what the module does: Displays a list of the routes that use this stop.
+
 export default function ScheduleRouteFromStopDisplay({ stop }: { stop: Stop }) {
   const [selectedSchedule, setSelectedSchedule] = React.useState<
     StopRoute | undefined

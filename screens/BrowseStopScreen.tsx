@@ -14,6 +14,12 @@ function TabBarIcon(props: { name: string; color: string }) {
   return <AntDesign size={24} style={{ marginBottom: -3 }} {...props} />;
 }
 
+// Name of the module: BrowseStopScreen
+// Date of module creation: December 8, 2020
+// Author of the module: Hayden Jeanson
+// Modification history: None
+// Synopsis of the module about what the module does: Screen for showing all of the routes using a stop
+
 export default function BrowseStopScreen({
   navigation,
   route,

@@ -22,6 +22,15 @@ import appData from "../app.json";
 import MapViewDirections from "react-native-maps-directions";
 import DirectionsDisplay from "../components/DirectionsDisplay";
 
+// Name of the module: MapScreen
+// Date of module creation: November 24, 2020
+// Author of the module: Danny Van Stemp
+// Modification history:
+//    Modification Date: Decemeber 8, 2020
+//    Modification Author: Hayden Jeanson
+//    Modification Details: Updated to use new JSON format
+// Synopsis of the module about what the module does: Screen for showing the map, pins, and info on selected pins
+
 export default function MapScreen() {
   let mapRef = React.useRef<MapView>(null);
   const [loadingLocation, setLoadingLocation] = React.useState(false);

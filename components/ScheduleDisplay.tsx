@@ -8,6 +8,15 @@ import { getWeekday } from "../util/helpers";
 import { MonoText } from "./StyledText";
 import { Text, View } from "./Themed";
 
+// Name of the module: ScheduleDisplay
+// Date of module creation: November 24, 2020
+// Author of the module: Danny Van Stemp
+// Modification history:
+//    Modification Date: Decemeber 8, 2020
+//    Modification Author: Hayden Jeanson
+//    Modification Details: Updated to take a route instead of stop. Set up to work with the new JSON format.
+// Synopsis of the module about what the module does: 
+
 export default function ScheduleDisplay({ stop_route }: { stop_route: StopRoute }) {
   let weekly_schedule: string[] = ["Not Running.", "Not Running.", "Not Running."]
   for (let i = 0; i < 3; i++) {

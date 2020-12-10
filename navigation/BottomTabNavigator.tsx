@@ -17,6 +17,12 @@ import BrowseStopScreen from "../screens/BrowseStopScreen";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
+// Name of the module: BottomTabNavigator
+// Date of module creation: November 24, 2020
+// Author of the module: Danny Van Stemp
+// Modification history: None
+// Synopsis of the module about what the module does: Controls bottom tab navigation
+
 export default function BottomTabNavigator() {
   const colorScheme = useColorScheme();
 

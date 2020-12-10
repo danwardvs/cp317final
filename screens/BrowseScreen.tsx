@@ -13,6 +13,15 @@ function TabBarIcon(props: { name: string; color: string }) {
   return <AntDesign size={24} style={{ marginBottom: -3 }} {...props} />;
 }
 
+// Name of the module: BrowseScreen
+// Date of module creation: November 24, 2020
+// Author of the module: Danny Van Stemp
+// Modification history:
+//    Modification Date: Decemeber 8, 2020
+//    Modification Author: Hayden Jeanson
+//    Modification Details: Updated to pass data to the new BrowseStopScreen
+// Synopsis of the module about what the module does: Screen for showing all of the stops
+
 export default function BrowseScreen({
   navigation,
 }: StackScreenProps<BrowseParamList, "BrowseScreen">) {
