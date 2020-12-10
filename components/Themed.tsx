@@ -4,6 +4,12 @@ import { Text as DefaultText, View as DefaultView } from 'react-native';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 
+// Name of the module: useThemeColor
+// Date of module creation: November 24, 2020
+// Author of the module: Danny Van Stemp
+// Modification history: None
+// Synopsis of the module about what the module does: Sets theme colours
+
 export function useThemeColor(
   props: { light?: string; dark?: string },
   colorName: keyof typeof Colors.light & keyof typeof Colors.dark

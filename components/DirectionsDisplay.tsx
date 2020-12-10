@@ -7,6 +7,12 @@ import {
   Platform,
 } from "react-native";
 
+// Name of the module: DirectionsDisplay
+// Date of module creation: November 24, 2020
+// Author of the module: Danny Van Stemp
+// Modification history: 
+// Synopsis of the module about what the module does: Displays the directions step by step as provided by the Google Maps API
+
 const DirectionsDisplay: React.FC<
   React.PropsWithChildren<{
     directions: any;

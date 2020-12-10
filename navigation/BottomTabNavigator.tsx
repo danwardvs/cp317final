@@ -13,8 +13,15 @@ import {
   BrowseParamList,
 } from "../types/routeParams";
 import StopDetailsScreen from "../screens/StopDetailsScreen";
+import BrowseStopScreen from "../screens/BrowseStopScreen";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
+
+// Name of the module: BottomTabNavigator
+// Date of module creation: November 24, 2020
+// Author of the module: Danny Van Stemp
+// Modification history: None
+// Synopsis of the module about what the module does: Controls bottom tab navigation
 
 export default function BottomTabNavigator() {
   const colorScheme = useColorScheme();
@@ -85,6 +92,11 @@ function BrowseNavigator() {
         name="BrowseScreen"
         component={BrowseScreen}
         options={{ headerTitle: "Browse By Stop" }}
+      />
+      <BrowseStack.Screen
+        name="BrowseStopScreen"
+        component={BrowseStopScreen}
+        options={{ headerTitle: "Browse Routes By Stop" }}
       />
       <BrowseStack.Screen
         name="StopDetailsScreen"

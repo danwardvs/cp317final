@@ -14,5 +14,6 @@ export type MapParamList = {
 
 export type BrowseParamList = {
   BrowseScreen: undefined;
-  StopDetailsScreen: { stop_id: string };
+  BrowseStopScreen: { stop_id: number}
+  StopDetailsScreen: { stop_id: number, route: number };
 };

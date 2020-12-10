@@ -1,9 +1,13 @@
 export interface Stop {
-  location: Coordinate;
+  id: number;
   title: string;
-  id: string;
-  description: string;
-  schedule: Schedule;
+  routes: StopRoute[];
+  location: Coordinate;
+}
+
+export interface StopRoute {
+  stop_route_id: number;
+  schedule: DayStopTimes[];
 }
 
 export interface Coordinate {
@@ -11,6 +15,7 @@ export interface Coordinate {
   longitude: number;
 }
 
-export interface Schedule {
-  week: string[];
+export interface DayStopTimes {
+  day: string;
+  arrival_time: string;
 }

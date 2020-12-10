@@ -4,7 +4,7 @@ import MapView, { Marker } from "react-native-maps";
 
 import { Text, View } from "../components/Themed";
 import data from "../data/stops.json";
-import { Stop, Coordinate, Schedule } from "../types/types";
+import { Stop, Coordinate } from "../types/types";
 import {
   equalCoordinates,
   getWeekday,
@@ -17,10 +17,19 @@ import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import CustomButton from "../components/CustomButton";
 import { ScrollView } from "react-native-gesture-handler";
-import ScheduleDisplay from "../components/ScheduleDisplay";
+import SelectRouteFromStopDisplay from "../components/SelectRouteFromStopDisplay";
 import appData from "../app.json";
 import MapViewDirections from "react-native-maps-directions";
 import DirectionsDisplay from "../components/DirectionsDisplay";
+
+// Name of the module: MapScreen
+// Date of module creation: November 24, 2020
+// Author of the module: Danny Van Stemp
+// Modification history:
+//    Modification Date: Decemeber 8, 2020
+//    Modification Author: Hayden Jeanson
+//    Modification Details: Updated to use new JSON format
+// Synopsis of the module about what the module does: Screen for showing the map, pins, and info on selected pins
 
 export default function MapScreen() {
   let mapRef = React.useRef<MapView>(null);
@@ -155,7 +164,6 @@ export default function MapScreen() {
               key={index}
               coordinate={stop.location}
               title={stop.title}
-              description={stop.description}
               pinColor={"blue"}
             />
           ))}
@@ -186,9 +194,7 @@ export default function MapScreen() {
               );
               setDetails(
                 "Closest stop is:\n" +
-                  closestStop.title +
-                  "\n" +
-                  closestStop.description
+                  closestStop.title
               );
             }}
             label={"Find Nearest Stop"}
@@ -246,7 +252,7 @@ export default function MapScreen() {
         )}
         {!details && selectedStop && (
           <View style={{ padding: 12 }}>
-            <ScheduleDisplay stop={selectedStop} />
+            <SelectRouteFromStopDisplay stop={selectedStop} />
           </View>
         )}
       </View>

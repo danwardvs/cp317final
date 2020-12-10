@@ -1,6 +1,13 @@
 import * as React from "react";
 import { StyleSheet, TouchableOpacity, Text } from "react-native";
 
+// Name of the module: CustomButton
+// Date of module creation: November 24, 2020
+// Author of the module: Danny Van Stemp
+// Modification history: none
+// Synopsis of the module about what the module does: Renders a custom styled button based on passed parameters.
+// Passed in colour, onPress routines, labels, and children defines how the button will look and function
+
 const CustomButton: React.FC<
   React.PropsWithChildren<{
     color?: string;
