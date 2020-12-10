@@ -129,8 +129,8 @@ export default function MapScreen() {
           initialRegion={{
             latitude: 43.4643,
             longitude: -80.5204,
-            latitudeDelta: 0.05,
-            longitudeDelta: 0.05,
+            latitudeDelta: 0.015,
+            longitudeDelta: 0.015,
           }}
           showsCompass
           onPress={() => {
@@ -155,7 +155,7 @@ export default function MapScreen() {
             <Marker
               coordinate={userLocation}
               title={"You"}
-              description={"This is u"}
+              description={"Current location"}
               pinColor={"red"}
             />
           )}
@@ -192,10 +192,7 @@ export default function MapScreen() {
                 closestStop.location.longitude,
                 0.005
               );
-              setDetails(
-                "Closest stop is:\n" +
-                  closestStop.title
-              );
+              setDetails("Closest stop is:\n" + closestStop.title);
             }}
             label={"Find Nearest Stop"}
           ></CustomButton>

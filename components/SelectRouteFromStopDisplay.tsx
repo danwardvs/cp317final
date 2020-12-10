@@ -44,6 +44,7 @@ export default function ScheduleRouteFromStopDisplay({ stop }: { stop: Stop }) {
     return (
       <View style={styles.container}>
         <FlatList
+          scrollEnabled={false}
           data={stop.routes}
           renderItem={({ item }) => (
             <TouchableOpacity
@@ -56,7 +57,9 @@ export default function ScheduleRouteFromStopDisplay({ stop }: { stop: Stop }) {
               }}
             >
               <View style={styles.tile} key={item.stop_route_id}>
-                <Text style={styles.item}>{"Route: " + item.stop_route_id}</Text>
+                <Text style={styles.item}>
+                  {"Route: " + item.stop_route_id}
+                </Text>
                 <View style={{ paddingTop: 10 }}>
                   <TabBarIcon name="right" color={"gray"} />
                 </View>
